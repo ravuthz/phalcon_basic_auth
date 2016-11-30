@@ -2,7 +2,7 @@
 
 class AuthController extends \Phalcon\Mvc\Controller {
     // redirect when user logged in
-    private $loggedInGo = "/";
+    private $loggedInGo = "";
 
     // redirect when user logged out
     private $loggedOutGo = "auth/login";
@@ -52,7 +52,7 @@ class AuthController extends \Phalcon\Mvc\Controller {
             $user = new Users();
             $user->email = $this->request->getPost("email", "email");
             $user->username = $this->request->getPost("username");
-            $user->password = $this->request->getPost("password");
+            $user->password = sha1($this->request->getPost("password"));
             $user->first_name = $this->request->getPost("first_name");
             $user->last_name = $this->request->getPost("last_name");
             $user->active = 1;
